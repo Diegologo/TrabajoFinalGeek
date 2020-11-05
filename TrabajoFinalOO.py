@@ -56,3 +56,4 @@ class Estado(TrabajoFinalDB.Base):
         return f'{self.id}, {self.Estado}, {self.Descripcion}'
 
 TrabajoFinalDB.Base.metadata.create_all(TrabajoFinalDB.engine)
+
