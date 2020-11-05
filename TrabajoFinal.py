@@ -1,14 +1,13 @@
 import TrabajoFinalDB
-from TrabajoFinalOO import Tarea, Usuario, 
+from TrabajoFinalOO import Tarea
 
 contador = 0
 salir = True
 Buscar = True
 
-
 def BuscarTarea():
     global Buscar
-    
+
     print('\nBuscando tarea')
     while Buscar:
         Filtro = input("Filtro de búsqueda: ")
@@ -21,17 +20,16 @@ def BuscarTarea():
             Responsable = input("Filtrar por responsables: ")
             tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Responsable=Responsable).first()
             print(tarea)
-            #Buscar=False
+            Buscar=False
         elif(Filtro == 'Estado'):
             Responsable = input("Filtrar por estados: ")
             tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Estado=Estado).first()
             print(tarea)
-            #Buscar=False
+            Buscar=False
         else:
             print('Filtro no reconocido, asegurese que está bien escrito y vuelva a intentarlo')
-            #Buscar=False
-            #>>>>>ahora mismo si llega a esta opción caerá en bucle infinito<<<<<
-    
+            Buscar=False
+
     print(tarea)
     #como hacer que vuelva al bucle anterior?
     #Hacer un submenú que te deje seleccionar por qué campo quieres buscar.
@@ -49,7 +47,7 @@ def CrearTarea():
     TrabajoFinalDB.session.add(tarea)
     TrabajoFinalDB.session.commit()
     print('\nTarea Creada\n')
- 
+
 def CambiarEstadoTarea():
     print('\nActualizando estado de la tarea\n')
     #menú para seleccionar entre los diferentes estados
@@ -78,8 +76,6 @@ def BorrarTarea():
         tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Titulo=TituloReferencia).first()
         else confirmacion.ower == 'n':
             print ('No se ha borrado')
-
-
 
     TrabajoFinalDB.session.delete(tarea)
     TrabajoFinalDB.session.commit()

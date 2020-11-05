@@ -10,19 +10,19 @@ class Tarea(TrabajoFinalDB.Base):
     Estado = Column(String(60))
     Responsable = Column(String(60))
     FechaCreacion = Column(String(60))
-    
+
     def __init__(self, Titulo, Descripcion, Estado, Responsable, FechaCreacion):
         self.Titulo = Titulo.lower
         self.Descripcion = Descripcion
         self.Estado = Estado
         self.Responsable = Responsable
         self.FechaCreacion = FechaCreacion
-        
+
     def __repr__(self):
         return f'{self.id}, {self.Titulo}, {self.Descripcion}, {self.Estado}, {self.Responsable}, {self.FechaCreacion}'
 
 TrabajoFinalDB.Base.metadata.create_all(TrabajoFinalDB.engine)
-'''
+
 class Usuario(TrabajoFinalDB.Base):
     __tablename__ = "usuarios"
 
@@ -35,7 +35,7 @@ class Usuario(TrabajoFinalDB.Base):
         self.Nombre = Nombre
         self.Apellidos = Apellidos
         self.Correo = Correo
-        
+
     def __repr__(self):
         return f'{self.id}, {self.nombre}, {self.Apellidos}, {self.Correo}'
 
@@ -51,9 +51,8 @@ class Estado(TrabajoFinalDB.Base):
     def __init__(self, Estado, Descripcion):
         self.Titulo = Estado
         self.Descripcion = Descripcion
-        
+
     def __repr__(self):
         return f'{self.id}, {self.Estado}, {self.Descripcion}'
 
 TrabajoFinalDB.Base.metadata.create_all(TrabajoFinalDB.engine)
-'''
