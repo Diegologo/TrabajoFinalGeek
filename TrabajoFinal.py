@@ -1,19 +1,41 @@
 import TrabajoFinalDB
-from TrabajoFinalOO import Tarea
+from TrabajoFinalOO import Tarea, Usuario, Estado
 
 contador = 0
 salir = True
 Buscar = True
+'''
+def EstadosPredeterminados():
+    NombreEstado = "Sólido"
+    Descripcion = "La parte contratante de la primera parte será en este contrato la parte contratante de la primera parte"
+    Estado = "Líquido"
+    Descripcion = "La parte contratante de la segunda parte será en este contrato la parte contratante de la segunda parte"
+    Estado = "Gaseoso"
+    Descripcion = "La parte contratante de la tercera parte será en este contrato la parte contratante de la tercera parte"
+
+    estado = Estado(NombreEstado, Descripcion)
+    TrabajoFinalDB.session.add(estado)
+    TrabajoFinalDB.session.commit()
+
+EstadosPredeterminados()'''
+    #aquí lo que quiero que haga es que cree automáticamente los 3 estados posibles
+
+def VerTarea():
+    print('\nEstas són tus tareas\n')
+    tareas = TrabajoFinalDB.session.query(Tarea).all()
+    print(tareas)
+    #como hacer que las tareas salgan una debajo de otra y no al lado? Había un comentario de algo parecido en slack pero no me sale.
 
 def BuscarTarea():
     global Buscar
 
     print('\nBuscando tarea')
     while Buscar:
-        Filtro = input("Filtro de búsqueda: ")
-        if(Filtro == 'Titulo'):
+        Filtro = input("Filtrar por: Título, Responsable o Estado?: ")
+        if(Filtro == 'Título'):
             Titulo = input("Filtrar por titulos: ")
-            tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Titulo=Titulo.lower).first()
+            tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Titulo=Titulo).first()
+            #cuando pongo el lower peta al buscar tareas
             print(tarea)
             Buscar=False
         elif(Filtro == 'Responsable'):
@@ -27,12 +49,8 @@ def BuscarTarea():
             print(tarea)
             Buscar=False
         else:
-            print('Filtro no reconocido, asegurese que está bien escrito y vuelva a intentarlo')
             Buscar=False
-
-    print(tarea)
-    #como hacer que vuelva al bucle anterior?
-    #Hacer un submenú que te deje seleccionar por qué campo quieres buscar.
+            print('\nFiltro no reconocido, asegurese que está bien escrito y vuelva a intentarlo')
 
 def CrearTarea():
     print('\nCreando Tarea:\n')
@@ -68,18 +86,16 @@ def EditarTarea():
     print('\nTarea modificada\n')
 
 def BorrarTarea():
-    #Como poner una confirmación antes de eliminar?
     print('\nEliminando tarea\n')
     TituloReferencia = input("Que tarea quieres eliminar? ")
-    confirmacion = input ('Seguro que quiere borrarlo y/n')
-        if confirmacion.lower == 'y':
+    confirmacion = input ('Seguro que quiere borrarlo? y/n: ')
+    if confirmacion == 'y':
         tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Titulo=TituloReferencia).first()
-        else confirmacion.ower == 'n':
-            print ('No se ha borrado')
-
-    TrabajoFinalDB.session.delete(tarea)
-    TrabajoFinalDB.session.commit()
-    print('\nTarea eliminada\n')
+        TrabajoFinalDB.session.delete(tarea)
+        TrabajoFinalDB.session.commit()
+        print('\nTarea eliminada\n')
+    else:
+        print('\nNo se ha borrado')
 
 while salir:
 
@@ -95,19 +111,19 @@ while salir:
 
     opciones = input("Selecciona una opción: ")
 
-    if(opciones == '1'):
-        print('\nEstas són tus tareas')
-    elif(opciones == '2'):
+    if(int(opciones) == 1):
+        VerTarea()
+    elif(int(opciones) == 2):
         CrearTarea()
     elif(int(opciones) == 3):
         CambiarEstadoTarea()
-    elif(opciones == '4'):
+    elif(int(opciones) == 4):
         EditarTarea()
-    elif(opciones == '5'):
+    elif(int(opciones) == 5):
         BorrarTarea()
-    elif(opciones == '6'):
+    elif(int(opciones) == 6):
         BuscarTarea()
-    elif(opciones == '7'):
+    elif(int(opciones) == 7):
         salir=False
         print('\nNo hagas hoy lo que puedas dejar para mañana\n')
     else:
