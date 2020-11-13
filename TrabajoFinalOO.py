@@ -5,11 +5,11 @@ class Estado(TrabajoFinalDB.Base):
     __tablename__ = "estados"
 
     id = Column(Integer, primary_key=True)
-    NombreEstado = Column(String(60))
+    Estado = Column(String(60))
     Descripcion = Column(String(255))
     
     def __init__(self, Estado, Descripcion):
-        self.NombreEstado = Estado
+        self.Estado = Estado
         self.Descripcion = Descripcion
 
     def __repr__(self):
@@ -25,7 +25,7 @@ class Usuario(TrabajoFinalDB.Base):
     Apellidos = Column(String(60))
     Correo = Column(String(60))
     
-    def __init__(self, Titulo, Descripcion, Estado, Responsable, FechaCreacion):
+    def __init__(self, Nombre, Apellidos, Correo):
         self.Nombre = Nombre
         self.Apellidos = Apellidos
         self.Correo = Correo
@@ -41,7 +41,7 @@ class Tarea(TrabajoFinalDB.Base):
     id = Column(Integer, primary_key=True)
     Titulo = Column(String(60))
     Descripcion = Column(String(255))
-    Estado = Column(String(60), ForeignKey("estados.NombreEstado"))
+    Estado = Column(String(60), ForeignKey("estados.Estado"))
     Responsable = Column(String(60), ForeignKey("usuarios.Nombre"))
     FechaCreacion = Column(String(60))
 
