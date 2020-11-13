@@ -4,21 +4,27 @@ from TrabajoFinalOO import Tarea, Usuario, Estado
 contador = 0
 salir = True
 Buscar = True
-'''
-def EstadosPredeterminados():
-    NombreEstado = "En proceso"
-    Descripcion = "La parte contratante de la primera parte será en este contrato la parte contratante de la primera parte"
-    Estado = "En revisión"
-    Descripcion = "La parte contratante de la segunda parte será en este contrato la parte contratante de la segunda parte"
-    Estado = "Completada"
-    Descripcion = "La parte contratante de la tercera parte será en este contrato la parte contratante de la tercera parte"
 
+def EstadosPredeterminados():
+    NombreEstado = 'En proceso'
+    Descripcion = 'La parte contratante de la primera parte será en este contrato la parte contratante de la primera parte'
     estado = Estado(NombreEstado, Descripcion)
     TrabajoFinalDB.session.add(estado)
     TrabajoFinalDB.session.commit()
 
-EstadosPredeterminados()'''
-    #aquí lo que quiero que haga es que cree automáticamente los 3 estados posibles
+    NombreEstado = 'En revisión'
+    Descripcion = 'La parte contratante de la segunda parte será en este contrato la parte contratante de la segunda parte'
+    estado = Estado(NombreEstado, Descripcion)
+    TrabajoFinalDB.session.add(estado)
+    TrabajoFinalDB.session.commit()
+
+    NombreEstado = 'Completada'
+    Descripcion = 'La parte contratante de la tercera parte será en este contrato la parte contratante de la tercera parte'
+    estado = Estado(NombreEstado, Descripcion)
+    TrabajoFinalDB.session.add(estado)
+    TrabajoFinalDB.session.commit()
+
+EstadosPredeterminados()
 
 def ListaTareas():
     print('\nEstas són tus tareas\n')
@@ -30,8 +36,7 @@ def CrearTarea():
     print('\nCreando Tarea:\n')
     Titulo = input('Titulo de la tarea: ')
     Descripcion = input('Escribe una breve descripción de la tarea: ')
-    Estado = input('En que estado se encuentra la tarea? ')
-    #al crear la tarea quiero que coja directamente el estado "En proceso"
+    Estado = 'En proceso'
     Responsable = input('Quién es el responsable: ')
     FechaCreacion = input('Fecha en la que se originó esta tarea: ')
 
@@ -41,8 +46,17 @@ def CrearTarea():
     print('\nTarea Creada\n')
 
 def CambiarEstadoTarea():
-    print('\nActualizando estado de la tarea\n')
     #menú para seleccionar entre los diferentes estados
+    print('\nActualizando estado de la tarea\n')
+    EstadoReferencia = input("Que tarea quieres modificar? ")
+    NombreEstado = input('Nuevo estado de la tarea: ')
+    Descripcion = input('Nueva descripción de la tarea: '):
+        if:
+        
+        estado.NombreEstado = Responsable
+        estado.Descripcion = Descripcion
+        TrabajoFinalDB.session.commit()
+
     print('\nEstado de la tarea actualizado')
 
 def EditarTarea():
@@ -76,19 +90,18 @@ def BuscarTarea():
 
     print('\nBuscando tarea')
     while Buscar:
-        Filtro = input("Filtrar por: Título, Responsable o Estado?: ")
-        if(Filtro == 'Título'):
+        Filtro = input("Filtrar por: título, responsable o estado?: ")
+        if(Filtro.lower() == 'título'):
             Titulo = input("Filtrar por titulos: ")
             tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Titulo=Titulo).first()
-            #cuando pongo el lower peta al buscar tareas
             print(tarea)
             Buscar=False
-        elif(Filtro == 'Responsable'):
+        elif(Filtro.lower() == 'responsable'):
             Responsable = input("Filtrar por responsables: ")
             tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Responsable=Responsable).first()
             print(tarea)
             Buscar=False
-        elif(Filtro == 'Estado'):
+        elif(Filtro.lower() == 'estado'):
             Responsable = input("Filtrar por estados: ")
             tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Estado=Estado).first()
             print(tarea)
@@ -167,7 +180,7 @@ while salir:
         print('\nNo hagas hoy lo que puedas dejar para mañana\n')
     else:
         if (contador == 0):
-            print('\nLos núemros que están entre corchetes són las opciones, solo puedes seleccionar esas')
+            print('\nLos números que están entre corchetes són las opciones, solo puedes seleccionar esas')
         elif (contador == 1):
             print('\nEs solo darle a uno de los números que tienes arriba, no es tan difícil, de verdad')
         elif (contador == 2):

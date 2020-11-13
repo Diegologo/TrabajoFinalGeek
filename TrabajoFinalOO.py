@@ -5,15 +5,15 @@ class Estado(TrabajoFinalDB.Base):
     __tablename__ = "estados"
 
     id = Column(Integer, primary_key=True)
-    Estado = Column(String(60))
+    NombreEstado = Column(String(60))
     Descripcion = Column(String(255))
     
-    def __init__(self, Estado, Descripcion):
-        self.Estado = Estado
+    def __init__(self, NombreEstado, Descripcion):
+        self.NombreEstado = NombreEstado
         self.Descripcion = Descripcion
 
     def __repr__(self):
-        return f'{self.id}, {self.Estado}, {self.Descripcion}'
+        return f'{self.id}, {self.NombreEstado}, {self.Descripcion}'
 
 TrabajoFinalDB.Base.metadata.create_all(TrabajoFinalDB.engine)
 
@@ -41,7 +41,7 @@ class Tarea(TrabajoFinalDB.Base):
     id = Column(Integer, primary_key=True)
     Titulo = Column(String(60))
     Descripcion = Column(String(255))
-    Estado = Column(String(60), ForeignKey("estados.Estado"))
+    Estado = Column(String(60), ForeignKey("estados.NombreEstado"))
     Responsable = Column(String(60), ForeignKey("usuarios.Nombre"))
     FechaCreacion = Column(String(60))
 
