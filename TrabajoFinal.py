@@ -23,6 +23,7 @@ def EstadosPredeterminados():
     estado = Estado(NombreEstado, Descripcion)
     TrabajoFinalDB.session.add(estado)
     TrabajoFinalDB.session.commit()
+    #esto funciona peeeeroooo crea los 3 estados otra vez cada vez que arranca el programa
 
 EstadosPredeterminados()
 
@@ -46,22 +47,30 @@ def CrearTarea():
     print('\nTarea Creada\n')
 
 def CambiarEstadoTarea():
-    #menú para seleccionar entre los diferentes estados
     print('\nActualizando estado de la tarea\n')
-    EstadoReferencia = input("Que tarea quieres modificar? ")
-    NombreEstado = input('Nuevo estado de la tarea: ')
-    Descripcion = input('Nueva descripción de la tarea: '):
-        if:
-        
-        estado.NombreEstado = Responsable
-        estado.Descripcion = Descripcion
+    EstadoReferencia = input("Título de la tarea a modificar: ")
+    estadoActual = TrabajoFinalDB.session.query(Tarea).filter_by(Titulo=EstadoReferencia).first()
+    NombreEstado = input('Definir nuevo estado entre los siguientes "En proceso", "En revisión" o "Completada": ')
+    if(NombreEstado.lower() == "en proceso"):
+        estadoNuevo = "En proceso"
+        estadoActual.Estado = estadoNuevo
         TrabajoFinalDB.session.commit()
+    elif(NombreEstado.lower() == "en revisión"):
+        estadoNuevo = "En revisión"
+        estadoActual.Estado = estadoNuevo
+        TrabajoFinalDB.session.commit()
+    elif(NombreEstado.lower() == "completada"):
+        estadoNuevo = "Completada"
+        estadoActual.Estado = estadoNuevo
+        TrabajoFinalDB.session.commit()
+    else:
+        print("Nuevo estado no reconocido, asegúrese que usa uno de los estados aceptados y vuelva a intentarlo")
 
     print('\nEstado de la tarea actualizado')
 
 def EditarTarea():
     print('\nModificando tarea\n')
-    TituloReferencia = input("Que tarea quieres modificar? ")
+    TituloReferencia = input("Título de la tarea a modificar: ")
     Titulo = input('Nuevo título de la tarea: ')
     Descripcion = input('Nueva descripción de la tarea: ')
     Responsable = input('Nuevo Responsable: ')
@@ -86,29 +95,22 @@ def BorrarTarea():
         print('\nNo se ha borrado\n')
 
 def BuscarTarea():
-    global Buscar
-
     print('\nBuscando tarea')
-    while Buscar:
-        Filtro = input("Filtrar por: título, responsable o estado?: ")
-        if(Filtro.lower() == 'título'):
-            Titulo = input("Filtrar por titulos: ")
-            tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Titulo=Titulo).first()
-            print(tarea)
-            Buscar=False
-        elif(Filtro.lower() == 'responsable'):
-            Responsable = input("Filtrar por responsables: ")
-            tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Responsable=Responsable).first()
-            print(tarea)
-            Buscar=False
-        elif(Filtro.lower() == 'estado'):
-            Responsable = input("Filtrar por estados: ")
-            tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Estado=Estado).first()
-            print(tarea)
-            Buscar=False
-        else:
-            Buscar=False
-            print('\nFiltro no reconocido, asegurese que está bien escrito y vuelva a intentarlo')
+    Filtro = input("Filtrar por: título, responsable o estado?: ")
+    if(Filtro.lower() == 'título'):
+        Titulo = input("Filtrar por titulos: ")
+        tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Titulo=Titulo).first()
+        print(tarea)
+    elif(Filtro.lower() == 'responsable'):
+        Responsable = input("Filtrar por responsables: ")
+        tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Responsable=Responsable).first()
+        print(tarea)
+    elif(Filtro.lower() == 'estado'):
+        Responsable = input("Filtrar por estados: ")
+        tarea = TrabajoFinalDB.session.query(Tarea).filter_by(Estado=Estado).first()
+        print(tarea)
+    else:
+        print('\nFiltro no reconocido, asegúrese que está bien escrito y vuelva a intentarlo')
 
 def ListaUsuario():
     print('\nEstos són los responsables\n')
