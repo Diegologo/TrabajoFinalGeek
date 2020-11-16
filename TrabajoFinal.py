@@ -31,7 +31,7 @@ def ListaTareas():
     print('\nEstas són tus tareas\n')
     tareas = TrabajoFinalDB.session.query(Tarea).all()
     for tarea in tareas:
-        print(tarea.Titulo, tarea.Descripcion, tarea.Estado, tarea.Responsable, tarea.FechaCreacion)
+        print(tarea.id, tarea.Titulo, tarea.Descripcion, tarea.Estado, tarea.Responsable, tarea.FechaCreacion)
 
 def CrearTarea():
     print('\nCreando Tarea:\n')
@@ -116,7 +116,7 @@ def ListaUsuario():
     print('\nEstos són los responsables\n')
     usuarios = TrabajoFinalDB.session.query(Usuario).all()
     for usuario in usuarios:
-        print(usuario.Nombre, usuario.Apellidos, usuario.Correo)
+        print(usuario.id, usuario.Nombre, usuario.Apellidos, usuario.Correo)
 
 def CrearUsuario():
     print('\nCreando responsable:\n')
@@ -158,26 +158,28 @@ while salir:
     print("[9]Salir\n\n")
 
     opciones = input("Selecciona una opción: ")
+    if opciones in ['0','1','2','3','4','5','6','7','8','9']:
+        opciones = int(opciones)
 
-    if(int(opciones) == 0):
+    if(opciones) == 0:
         ListaTareas()
-    elif(int(opciones) == 1):
+    elif(opciones) == 1:
         CrearTarea()
-    elif(int(opciones) == 2):
+    elif(opciones) == 2:
         CambiarEstadoTarea()
-    elif(int(opciones) == 3):
+    elif(opciones) == 3:
         EditarTarea()
-    elif(int(opciones) == 4):
+    elif(opciones) == 4:
         BorrarTarea()
-    elif(int(opciones) == 5):
+    elif(opciones) == 5:
         BuscarTarea()
-    elif(int(opciones) == 6):
+    elif(opciones) == 6:
         ListaUsuario()
-    elif(int(opciones) == 7):
+    elif(opciones) == 7:
         CrearUsuario()
-    elif(int(opciones) == 8):
+    elif(opciones) == 8:
         BorrarUsuario()
-    elif(int(opciones) == 9):
+    elif(opciones) == 9:
         salir=False
         print('\nNo hagas hoy lo que puedas dejar para mañana\n')
     else:
