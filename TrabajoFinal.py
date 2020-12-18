@@ -4,7 +4,7 @@ from TrabajoFinalOO import Tarea, Usuario, Estado
 contador = 0
 salir = True
 Buscar = True
-
+'''
 def EstadosPredeterminados():
     NombreEstado = 'En proceso'
     Descripcion = 'La parte contratante de la primera parte será en este contrato la parte contratante de la primera parte'
@@ -26,7 +26,7 @@ def EstadosPredeterminados():
     #esto funciona peeeeroooo crea los 3 estados otra vez cada vez que arranca el programa
 
 EstadosPredeterminados()
-
+'''
 def ListaTareas():
     print('\nEstas són tus tareas\n')
     tareas = TrabajoFinalDB.session.query(Tarea).all()

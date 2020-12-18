@@ -8,6 +8,7 @@ class Estado(TrabajoFinalDB.Base):
     NombreEstado = Column(String(60))
     Descripcion = Column(String(255))
     
+    
     def __init__(self, NombreEstado, Descripcion):
         self.NombreEstado = NombreEstado
         self.Descripcion = Descripcion
