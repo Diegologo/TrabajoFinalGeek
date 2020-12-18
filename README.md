@@ -1,6 +1,6 @@
 # TrabajoFinalGeek
-/n
+\n
 PRUEBA TÉCNICA
 Bootcamp Programación Desde Cero
-/n
+\n
 Autor: Diego López González
